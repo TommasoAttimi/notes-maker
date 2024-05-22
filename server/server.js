@@ -10,8 +10,14 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const corsOptions = {
+  origin: "https://nimble-mooncake-8c9bc2.netlify.app", // or '*' to allow all origins
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Connect to MongoDB Atlas
