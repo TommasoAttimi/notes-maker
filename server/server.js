@@ -22,7 +22,14 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB Atlas
 const dbURI = process.env.MONGO_URI;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose
+  .connect(dbURI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
 
 // Define Note model
 const Note = mongoose.model("Note", {
